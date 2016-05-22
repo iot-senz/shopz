@@ -122,7 +122,7 @@
                 android:layout_centerInParent="true"
                 android:id="@+id/topup_text"
                 android:layout_toRightOf="@+id/topup_icon"
-                android:text="Top Up"
+                android:text="History"
                 android:textColor="#b5c976"
                 android:layout_height="wrap_content" />
         </RelativeLayout>
