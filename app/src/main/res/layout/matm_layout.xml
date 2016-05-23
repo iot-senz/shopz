@@ -10,7 +10,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_weight="1"
-        android:background="@drawable/blur6"
+        android:background="@drawable/freee"
         android:orientation="vertical"
         android:padding="0dp">
 
@@ -24,7 +24,7 @@
                 android:layout_height="50dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="100dp"
-                android:background="@drawable/circle_shape_red"
+                android:background="@drawable/circle_shape_green"
                 android:gravity="center"
                 android:text="#"
                 android:textColor="#fff"
@@ -59,7 +59,7 @@
                     android:layout_width="200dp"
                     android:layout_height="200dp"
                     android:layout_centerHorizontal="true"
-                    android:background="@drawable/circle_shape_red"
+                    android:background="@drawable/circle_shape_green"
                     android:visibility="visible">
 
                     <TextView
