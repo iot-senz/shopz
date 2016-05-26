@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,7 +35,7 @@ import com.score.shopz.utils.SenzParser;
 import org.json.JSONException;
 
 
-public class BillActivity extends Activity implements NfcAdapter.CreateNdefMessageCallback, NfcAdapter.OnNdefPushCompleteCallback {
+public class BillActivity extends Activity implements NfcAdapter.CreateNdefMessageCallback, NfcAdapter.OnNdefPushCompleteCallback, View.OnClickListener {
 
     private static final String TAG = BillActivity.class.getName();
 
@@ -52,6 +53,8 @@ public class BillActivity extends Activity implements NfcAdapter.CreateNdefMessa
     private EditText billNoEditText;
     private EditText billAccountEditText;
     private EditText billAmountEditText;
+
+    private RelativeLayout qrCodeButton;
 
     // Activity deals with a bill
     private Bill bill;
@@ -148,6 +151,9 @@ public class BillActivity extends Activity implements NfcAdapter.CreateNdefMessa
         billNoEditText.setTypeface(typeface, Typeface.BOLD);
         billAccountEditText.setTypeface(typeface, Typeface.BOLD);
         billAmountEditText.setTypeface(typeface, Typeface.BOLD);
+
+        qrCodeButton = (RelativeLayout) findViewById(R.id.qr_code_generate_button);
+        qrCodeButton.setOnClickListener(this);
     }
 
     /**
@@ -275,4 +281,27 @@ public class BillActivity extends Activity implements NfcAdapter.CreateNdefMessa
         dialog.show();
     }
 
+    @Override
+    public void onClick(View v) {
+        if (v == qrCodeButton) {
+            onClickQrCode();
+        }
+    }
+
+    private void onClickQrCode() {
+        if (bill != null) try {
+            // populate bill with amount first
+            // then create JSON string to send via NFC
+            bill.setAmount(billAmountEditText.getText().toString().trim());
+            String message = JSONUtils.getBillJson(bill);
+
+            // navigate to QrCodeActivity
+            Intent intent = new Intent(BillActivity.this, QrCodeActivity.class);
+            intent.putExtra("EXTRA", message);
+            startActivity(intent);
+            overridePendingTransition(R.anim.bottom_in, R.anim.stay_in);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 }
