@@ -67,7 +67,6 @@ public class MatmActivity extends Activity implements NfcAdapter.CreateNdefMessa
     private IntentFilter[] nfcIntentFilters;
     private String[][] nfcTechLists;
 
-
     // activity deal with matm
     private Matm thisMatm;
     private String receivedKey;
@@ -388,7 +387,7 @@ public class MatmActivity extends Activity implements NfcAdapter.CreateNdefMessa
                 // msg response received
                 ActivityUtils.cancelProgressDialog();
                 isResponseReceived = true;
-                senzCountDownTimer.cancel();
+                if (senzCountDownTimer != null) senzCountDownTimer.cancel();
 
                 String msg = senz.getAttributes().get("msg");
                 if (msg != null && msg.equalsIgnoreCase("DONE")) {

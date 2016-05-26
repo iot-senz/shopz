@@ -90,7 +90,7 @@
                 android:layout_centerInParent="true"
                 android:id="@+id/bill_text"
                 android:layout_toRightOf="@+id/bill_icon"
-                android:text="Bill"
+                android:text="Invoice"
                 android:textColor="#b5c976"
                 android:layout_height="wrap_content" />
         </RelativeLayout>
