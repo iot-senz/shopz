@@ -42,7 +42,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:text="Request customer \n to touch your device to confirm and complete the payment"
+                android:text="Request your customer to touch your device to confirm and complete the payment."
                 android:textColor="#fff"
                 android:textSize="20sp"
                 android:visibility="visible">

@@ -63,7 +63,7 @@ public class BillActivity extends Activity implements NfcAdapter.CreateNdefMessa
         @Override
         public void onReceive(Context context, Intent intent) {
             Log.d(TAG, "Got message from Senz service");
-            handleMessage(intent);
+            //handleMessage(intent);
         }
     };
 
@@ -78,7 +78,15 @@ public class BillActivity extends Activity implements NfcAdapter.CreateNdefMessa
         initBill();
 
         // register broadcast receiver
-        registerReceiver(senzMessageReceiver, new IntentFilter("com.score.shopz.DATA_SENZ"));
+        //registerReceiver(senzMessageReceiver, new IntentFilter("com.score.shopz.DATA_SENZ"));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // register broadcast receiver
+        //registerReceiver(senzMessageReceiver, new IntentFilter("com.score.shopz.DATA_SENZ"));
     }
 
     /**
@@ -87,7 +95,16 @@ public class BillActivity extends Activity implements NfcAdapter.CreateNdefMessa
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unregisterReceiver(senzMessageReceiver);
+        //unregisterReceiver(senzMessageReceiver);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //unregisterReceiver(senzMessageReceiver);
     }
 
     /**
