@@ -1,6 +1,7 @@
 package com.score.shopz.utils;
 
 import com.score.shopz.pojos.Bill;
+import com.score.shopz.pojos.Matm;
 import com.score.shopz.pojos.TopUp;
 
 import org.json.JSONException;
@@ -43,6 +44,20 @@ public class JSONUtils {
         String amnt = jsonObject.getString("amnt");
 
         return new TopUp(acc, amnt, getCurrentTime());
+    }
+
+    /**
+     * Create Matm object by parsing JSON string
+     *
+     * @param jsonString json string
+     * @return Matm Object
+     */
+    public static Matm getMatm(String jsonString) throws JSONException {
+        JSONObject jsonObject = new JSONObject(jsonString);
+        String acc = jsonObject.getString("tid");
+        String key = jsonObject.getString("key");
+
+        return new Matm(acc, key);
     }
 
     /**
