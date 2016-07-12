@@ -193,6 +193,8 @@ public class MatmActivity extends Activity {
         if (nfcAdapter == null) {
             Toast.makeText(this, "[ERROR] No NFC supported", Toast.LENGTH_LONG).show();
         } else {
+            nfcAdapter.setNdefPushMessage(null, this);
+
             // create an intent with tag data and deliver to this activity
             nfcPendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
 
