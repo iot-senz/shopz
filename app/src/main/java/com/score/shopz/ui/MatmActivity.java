@@ -14,9 +14,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.nfc.NdefMessage;
-import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
-import android.nfc.NfcEvent;
 import android.nfc.tech.NfcF;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -41,7 +39,7 @@ import com.score.shopz.utils.ActivityUtils;
 
 import java.util.HashMap;
 
-public class MatmActivity extends Activity implements NfcAdapter.CreateNdefMessageCallback, NfcAdapter.OnNdefPushCompleteCallback {
+public class MatmActivity extends Activity {
 
     private static final String TAG = MatmActivity.class.getName();
 
@@ -180,38 +178,6 @@ public class MatmActivity extends Activity implements NfcAdapter.CreateNdefMessa
      * {@inheritDoc}
      */
     @Override
-    public NdefMessage createNdefMessage(NfcEvent nfcEvent) {
-        if (thisMatm != null) {
-            NdefRecord ndefRecord = NdefRecord.createMime("text/plain", thisMatm.getKey().getBytes());
-
-            return new NdefMessage(ndefRecord);
-        }
-
-        return null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void onNdefPushComplete(NfcEvent event) {
-        // need to run on UI thread since beam touch involved here
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                // start progress dialog
-                //ActivityUtils.showProgressDialog(this, "Please wait...");
-
-                // toast to notify wait
-                Toast.makeText(MatmActivity.this, "Please wait", Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     protected void onDestroy() {
         super.onDestroy();
         unbindService(senzServiceConnection);
@@ -227,10 +193,6 @@ public class MatmActivity extends Activity implements NfcAdapter.CreateNdefMessa
         if (nfcAdapter == null) {
             Toast.makeText(this, "[ERROR] No NFC supported", Toast.LENGTH_LONG).show();
         } else {
-            // set listeners to receive data
-            nfcAdapter.setNdefPushMessageCallback(this, this);
-            nfcAdapter.setOnNdefPushCompleteCallback(this, this);
-
             // create an intent with tag data and deliver to this activity
             nfcPendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
 
