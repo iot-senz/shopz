@@ -27,7 +27,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="25dp"
-                    android:text="Bill No"
+                    android:text="Invoice No"
                     android:textColor="#4a4a4a"
                     android:textSize="20dp"></TextView>
 

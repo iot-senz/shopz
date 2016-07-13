@@ -96,12 +96,16 @@ public class BillActivity extends Activity implements NfcAdapter.CreateNdefMessa
         if (bill != null) try {
             // populate bill with amount first
             // then create JSON string to send via NFC
-            bill.setAmount(billAmountEditText.getText().toString().trim());
-            String message = JSONUtils.getBillJson(bill);
+            String billAmount = billAmountEditText.getText().toString().trim();
 
-            NdefRecord ndefRecord = NdefRecord.createMime("text/plain", message.getBytes());
+            if (!billAmount.isEmpty()) {
+                bill.setAmount(billAmount);
+                String message = JSONUtils.getBillJson(bill);
 
-            return new NdefMessage(ndefRecord);
+                NdefRecord ndefRecord = NdefRecord.createMime("text/plain", message.getBytes());
+
+                return new NdefMessage(ndefRecord);
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
