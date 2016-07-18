@@ -120,8 +120,8 @@ public class HomeActivity extends Activity implements View.OnClickListener {
             navigateToBillActivity();
         } else if (view == relativeLayoutTopUp) {
             // display top up activity
-            //startActivity(new Intent(HomeActivity.this, TopupActivity.class));
-            //overridePendingTransition(R.anim.right_in, R.anim.stay_in);
+            startActivity(new Intent(HomeActivity.this, HistoryListActivity.class));
+            overridePendingTransition(R.anim.right_in, R.anim.stay_in);
         } else if (view == relativeLayoutSettings) {
 
         }

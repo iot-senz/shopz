@@ -34,8 +34,12 @@ import com.score.senzc.enums.SenzTypeEnum;
 import com.score.senzc.pojos.Senz;
 import com.score.senzc.pojos.User;
 import com.score.shopz.R;
+import com.score.shopz.db.PayzDbSource;
+import com.score.shopz.pojos.Bill;
 import com.score.shopz.pojos.Matm;
+import com.score.shopz.pojos.Payz;
 import com.score.shopz.utils.ActivityUtils;
+import com.score.shopz.utils.JSONUtils;
 
 import java.util.HashMap;
 
@@ -67,6 +71,7 @@ public class MatmActivity extends Activity {
 
     // activity deal with matm
     private Matm thisMatm;
+    private Bill thisBill;
     private String receivedKey;
 
     // service connection
@@ -248,7 +253,8 @@ public class MatmActivity extends Activity {
     private void initMatm() {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            thisMatm = bundle.getParcelable("EXTRA");
+            thisMatm = bundle.getParcelable("EXTRA_MATM");
+            thisBill = bundle.getParcelable("EXTRA_BILL");
 
             if (thisMatm != null) {
                 Log.i(TAG, "Matm tid :" + thisMatm.gettId());
@@ -358,6 +364,9 @@ public class MatmActivity extends Activity {
                 String msg = senz.getAttributes().get("msg");
                 if (msg != null && msg.equalsIgnoreCase("DONE")) {
                     Toast.makeText(this, "Payment successful", Toast.LENGTH_LONG).show();
+
+                    // save payz in db
+                    new PayzDbSource(MatmActivity.this).createPayz(new Payz(thisBill.getAccount(), thisBill.getAmount(), JSONUtils.getCurrentTime()));
 
                     // exit from activity
                     this.finish();

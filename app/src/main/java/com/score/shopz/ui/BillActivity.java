@@ -231,7 +231,8 @@ public class BillActivity extends Activity implements NfcAdapter.CreateNdefMessa
 
                 // launch Matm activity
                 Intent mapIntent = new Intent(this, MatmActivity.class);
-                mapIntent.putExtra("EXTRA", matm);
+                mapIntent.putExtra("EXTRA_MATM", matm);
+                mapIntent.putExtra("EXTRA_BILL", bill);
                 startActivity(mapIntent);
                 this.finish();
                 overridePendingTransition(R.anim.stay_in, R.anim.right_in);

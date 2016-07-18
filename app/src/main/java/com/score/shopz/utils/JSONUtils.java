@@ -51,7 +51,7 @@ public class JSONUtils {
      *
      * @return
      */
-    private static String getCurrentTime() {
+    public static String getCurrentTime() {
         //date format
         String DATE_FORMAT_NOW = "yyyy/MM/dd HH:mm:ss";
 

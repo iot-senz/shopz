@@ -83,6 +83,15 @@
         </activity>
 
         <activity
+            android:name=".ui.HistoryListActivity"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_pay"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.DarkActionBar">
+        </activity>
+
+        <activity
             android:name=".ui.PayActivity"
             android:configChanges="orientation"
             android:label="@string/title_activity_pay"
